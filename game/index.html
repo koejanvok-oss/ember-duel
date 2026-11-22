@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember Duel — a card battler of ember and elements</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- TITLE SCREEN -->
+  <section id="screen-title" class="screen">
+    <div class="title-embers" aria-hidden="true"><span>▲</span><span>●</span><span>◆</span><span>■</span><span>▲</span><span>●</span></div>
+    <h1 class="game-title">EMBER<br>DUEL</h1>
+    <p class="tagline">A card battler of ember and elements.<br>Outwit Kindle, the rival who always tells you what she plans next.</p>
+    <div class="element-key">
+      <span class="key flame"><i>▲</i> Flame — burns</span>
+      <span class="key tide"><i>●</i> Tide — flows</span>
+      <span class="key leaf"><i>◆</i> Leaf — mends</span>
+      <span class="key stone"><i>■</i> Stone — endures</span>
+    </div>
+    <button id="btn-start" class="big-btn">Begin the Duel</button>
+    <button id="btn-how" class="small-btn">How to play</button>
+    <div id="howto" class="howto" hidden>
+      <p><b>Goal:</b> reduce Kindle's life from 20 to 0 before she does the same to you.</p>
+      <p><b>Your turn:</b> you gain ember (mana) and draw a card. Click a card — or press 1–5 — to play it if you can afford its ember cost. Press <b>Enter</b> or <b>Space</b> to end your turn.</p>
+      <p><b>Surge combo:</b> play two cards of the same element in one turn to trigger that element's surge — Flame +3 damage, Tide draws a card, Leaf heals 3, Stone gains 4 shield.</p>
+      <p><b>Read Kindle:</b> her banner tells you her intent for her next turn — <i>gathering embers</i>, <i>raising guard</i> or <i>stoking flames</i> — so you can shield up or strike first.</p>
+      <p><b>Shield</b> absorbs damage until your next turn. <b>Heal</b> restores life. If your deck runs out, it reshuffles from your discard pile. You start with a head start of 1 extra ember.</p>
+      <p><b>Ember storm:</b> from turn 13 on, the table itself burns both duelists a little more each round — so no duel can stall forever.</p>
+    </div>
+    <p class="credit">An original game · art, sounds and rules made for this duel</p>
+  </section>
+
+  <!-- TABLE SCREEN -->
+  <section id="screen-table" class="screen" hidden>
+    <header class="table-top">
+      <div class="fighter ai-side">
+        <div class="portrait ai-portrait">K</div>
+        <div class="fighter-info">
+          <div class="fighter-name">Kindle <span class="ai-tag">RIVAL</span></div>
+          <div class="life-bar"><div id="ai-life-fill" class="life-fill"></div><span id="ai-life-text" class="life-text">20 / 20</span></div>
+          <div class="ember-row"><span class="ember-pip">◆</span><span id="ai-ember-text">3 ember</span><span id="ai-shield-text" class="shield-text"></span></div>
+        </div>
+      </div>
+      <div class="intent-box" id="intent-box">
+        <div class="intent-label">KINDLE'S INTENT</div>
+        <div class="intent-text" id="intent-text">…</div>
+      </div>
+      <div class="turn-box">
+        <div id="turn-text" class="turn-text">Your turn</div>
+        <div id="deck-counts" class="deck-counts"></div>
+      </div>
+    </header>
+
+    <div class="ai-hand" id="ai-hand" aria-label="Kindle's hand"></div>
+
+    <div class="middle">
+      <div id="played-area" class="played-area"></div>
+      <div id="log" class="log" aria-live="polite"></div>
+    </div>
+
+    <div class="player-zone">
+      <div class="fighter player-side">
+        <div class="portrait player-portrait">Y</div>
+        <div class="fighter-info">
+          <div class="fighter-name">You <span class="you-tag">DUELIST</span></div>
+          <div class="life-bar"><div id="player-life-fill" class="life-fill"></div><span id="player-life-text" class="life-text">20 / 20</span></div>
+          <div class="ember-row"><span class="ember-pip">◆</span><span id="player-ember-text">3 ember</span><span id="player-shield-text" class="shield-text"></span></div>
+        </div>
+        <button id="btn-end-turn" class="end-turn-btn">End Turn ⏎</button>
+      </div>
+      <div class="player-hand" id="player-hand" aria-label="Your hand"></div>
+      <div class="hint">Click a card or press 1–5 to play · Enter ends turn · M mutes sound</div>
+    </div>
+  </section>
+
+  <!-- END SCREEN -->
+  <section id="screen-end" class="screen" hidden>
+    <div id="end-emblem" class="end-emblem">▲</div>
+    <h1 id="end-title" class="end-title">VICTORY</h1>
+    <p id="end-sub" class="end-sub"></p>
+    <div id="end-stats" class="end-stats"></div>
+    <button id="btn-again" class="big-btn">Duel Again</button>
+    <button id="btn-title" class="small-btn">Back to Title</button>
+  </section>
+
+</div>
+<div id="float-layer"></div>
+<script src="js/cards.js"></script>
+<script src="js/deck.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/game.js"></script>
+<script src="js/render.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
